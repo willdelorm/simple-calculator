@@ -1,55 +1,60 @@
-const display = document.getElementById("display");
-const buttons = Array.from(document.getElementsByClassName("btn"));
+const form = document.getElementById("calc-form");
+form.addEventListener("submit", (e) => e.preventDefault());
 
-let acc = "",
-  currentValue = "",
-  operator = "";
-let isDisplayActive = false;
+const output = document.getElementById("output");
+const operands = document.querySelectorAll("button[data-type=operand]");
+const operators = document.querySelectorAll("button[data-type=operator]");
 
-buttons.map((button) => {
-  button.addEventListener("click", (e) => {
-    const keyValue = e.target.innerText;
-    if (Number(keyValue) || keyValue === ".") {
-      if (isDisplayActive) {
-        display.innerText += keyValue;
-      } else {
-        isDisplayActive = true;
-        display.innerText = keyValue;
-      }
-    } else if (keyValue.match(/[\+\-x\/]/)) {
-      isDisplayActive = false;
-      acc = display.innerText;
-      operator = keyValue;
-    } else if (keyValue === "=") {
-      isDisplayActive = false;
-      if (!currentValue) {
-        currentValue = display.innerText;
-      }
-      switch (operator) {
-        case "+":
-          display.innerText = Number(acc) + Number(currentValue);
-          break;
-        case "-":
-          display.innerText = Number(acc) - Number(currentValue);
-          break;
-        case "x":
-          display.innerText = Number(acc) * Number(currentValue);
-          break;
-        case "/":
-          display.innerText = Number(acc) / Number(currentValue);
-          break;
-      }
-      acc = display.innerText;
-      isDisplayActive = false;
-    } else if (keyValue === "CE") {
-      isDisplayActive = false;
-      display.innerText = "0";
-    } else if (keyValue === "C") {
-      isDisplayActive = false;
-      display.innerText = "0";
-      acc = "";
-      currentValue = "";
-      operator = "";
+let isOperator = false;
+operands.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    removeActive();
+    if (output.value == "0") {
+      output.value = e.target.value;
+    } else if (isOperator) {
+      isOperator = false;
+      output.value = e.target.value;
+    } else if (output.value.includes(".")) {
+      output.value = output.value + "" + e.target.value.replace(".", "");
+    } else {
+      output.value = output.value + "" + e.target.value;
     }
   });
 });
+
+let equation = [];
+operators.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    removeActive();
+    e.currentTarget.classList.add("active");
+
+    switch (e.target.value) {
+      case "%":
+        output.value = parseFloat(output.value) / 100;
+        break;
+      case "invert":
+        output.value = parseFloat(output.value) * -1;
+        break;
+      case "=":
+        equation.push(output.value);
+        output.value = eval(equation.join(""));
+        equation = [];
+        break;
+      default:
+        let lastItem = equation[equation.length - 1];
+        if (["/", "*", "+", "-"].includes(lastItem) && isOperator) {
+          equation.pop();
+          equation.push(e.target.value);
+        } else {
+          equation.push(output.value);
+          equation.push(e.target.value);
+        }
+        isOperator = true;
+        break;
+    }
+  });
+});
+
+const removeActive = () => {
+  operators.forEach((btn) => btn.classList.remove("active"));
+};
