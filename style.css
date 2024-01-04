@@ -91,20 +91,19 @@ input[type="text"] {
 }
 
 .btn-grey {
-  background-color: #9f9f9f;
-  color: #000;
+  background-color: #128094;
 }
 
 .btn-grey:hover {
-  background-color: #ededed;
+  background-color: #18a6bf;
 }
 
 .btn-dark-grey {
-  background-color: #313131;
+  background-color: #9f9f9f;
 }
 
 .btn-dark-grey:hover {
-  background-color: #999999;
+  background-color: #ededed;
 }
 
 .btn-orange {
