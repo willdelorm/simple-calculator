@@ -1,98 +1,117 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400&display=swap");
 
 *,
-html,
-body,
-p {
-  box-sizing: border-box;
-  font-family: "Noto Sans", sans-serif;
-  margin: 0;
+*::before,
+*::after {
   padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: inherit;
 }
 
 body {
-  margin-top: 10%;
-}
-
-/* Grid */
-.main-container {
+  background-color: #333333;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  /* height: 100vh; */
+  font-size: 16px;
 }
 
-.calc-container {
-  display: grid;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+html,
+body {
+  height: 100vh;
+  font-family: "Noto Sans", sans-serif;
 }
 
-/* Display */
-#display {
+button {
+  cursor: pointer;
+  border: 0;
+}
+
+input[type="text"] {
+  background-color: transparent;
+  border: 0;
+  color: #d2d2d2;
+  font-size: 3rem;
+  text-align: end;
   width: 100%;
-  height: 2em;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  color: #fdfefe;
-  padding-right: 10px;
-  font-size: 3em;
-  text-align: right;
+}
+
+#main {
+  border: 2px solid #ededed;
+  border-radius: 50px;
+  width: 100%;
+  max-width: 280px;
   background-color: #223850;
-  transition: all 0.3s ease-in;
+  padding: 2rem 1rem;
 }
 
-#buttons-container {
-  display: grid;
-  grid-template-columns: repeat(4, auto);
-  text-align: center;
+.header {
+  padding: 12px;
 }
 
-/* Buttons */
+.footer > * + * {
+  margin-top: 1rem;
+}
+
+.footer > *:last-child {
+  gap: 1rem;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.3rem;
+}
+
 .btn {
   display: flex;
-  font-size: 1.2em;
-  cursor: pointer;
   justify-content: center;
   align-items: center;
-  padding: 20px 30px;
-  transition: all 0.3s ease-in;
-  border: 0.3px solid rgba(251, 253, 255, 0.171);
-}
-
-.zero {
-  grid-column: span 2;
-}
-
-.equal {
-  grid-row: span 2;
-}
-
-.btn-num {
-  background-color: #223850;
-  color: #6885a7;
-}
-
-.btn-num:hover {
-  background-color: #233b55;
-}
-
-.btn-operator {
-  background-color: #128094;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
   color: #ffffff;
+  font-size: 20px;
+  transition: all 0.3s ease-in;
 }
 
-.btn-operator:hover {
-  background-color: rgb(52, 155, 196);
+.btn.btn-grow {
+  flex-grow: 1;
+  border-radius: 40px;
 }
 
-.equal {
-  background-color: #e77c18;
+.btn:hover {
+  transform: translate(-2px, -3px);
 }
 
-.equal:hover {
-  background-color: #e98323;
+.btn.active {
+  background-color: #ffffff;
+  color: #f69906;
+}
+
+.btn-grey {
+  background-color: #9f9f9f;
+  color: #000;
+}
+
+.btn-grey:hover {
+  background-color: #ededed;
+}
+
+.btn-dark-grey {
+  background-color: #313131;
+}
+
+.btn-dark-grey:hover {
+  background-color: #999999;
+}
+
+.btn-orange {
+  background-color: #f69906;
+}
+
+.btn-orange:hover {
+  background-color: orange;
 }
