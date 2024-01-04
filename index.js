@@ -4,6 +4,8 @@ form.addEventListener("submit", (e) => e.preventDefault());
 const output = document.getElementById("output");
 const operands = document.querySelectorAll("button[data-type=operand]");
 const operators = document.querySelectorAll("button[data-type=operator]");
+const clearBtn = document.querySelector("button[data-type=clear]");
+console.log(clearBtn);
 
 let isOperator = false;
 operands.forEach((btn) => {
@@ -19,6 +21,7 @@ operands.forEach((btn) => {
     } else {
       output.value = output.value + "" + e.target.value;
     }
+    clearBtn.textContent = "C";
   });
 });
 
@@ -58,3 +61,13 @@ operators.forEach((btn) => {
 const removeActive = () => {
   operators.forEach((btn) => btn.classList.remove("active"));
 };
+
+clearBtn.addEventListener("click", (e) => {
+  output.value = "0";
+  if (clearBtn.textContent === "C") {
+    clearBtn.textContent = "AC";
+  } else {
+    removeActive();
+    equation = [];
+  }
+});
