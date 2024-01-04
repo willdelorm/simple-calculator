@@ -10,7 +10,7 @@ The Simple JavaScript Calculator is a straightforward web-based calculator built
 
 ## Usage
 
-**A link to access the application will be provided upon release.**
+Access the Simple JavaScript Calculator here: [Simple JavaScript Calculator](https://willdelorm.github.io/simple-calculator/)
 
 Simply enter your mathematical expressions and use the calculator's features to perform calculations with ease.
 
